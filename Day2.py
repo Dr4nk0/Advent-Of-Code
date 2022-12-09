@@ -63,7 +63,7 @@ class need_to_follow_instructions :
         elif input_player_1 == 'Scissors' :
             player_2_score.append(outcome_score['Won'] + shapes_score['Rock'])   
 
-with open(r"C:\Users\ng92FFF\Documents\AventOfCode\Day2\input.txt", "r") as input_file :
+with open(r"input.txt", "r") as input_file :
     choice = int(input("First part (1) Second part (2)\n"))
     if choice == 1 :
         # First part of the challenge
