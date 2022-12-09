@@ -19,7 +19,7 @@ for letter in ascii_upper :
     uppercase_priority[letter] = i
     i = i + 1
 
-with open(r"C:\Users\ng92FFF\Documents\AventOfCode\Day3\input.txt", "r") as input_file :
+with open(r"input.txt", "r") as input_file :
     # First part of the challenge
     data = input_file.readlines()
     ruckstacks = []
