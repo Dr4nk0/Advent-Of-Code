@@ -1,7 +1,7 @@
 from heapq import nlargest
 Elfs_inventory = {}
 
-with open(r"C:\Users\ng92FFF\Documents\AventOfCode\Day1\input.txt", "r") as input_file :
+with open(r"input.txt", "r") as input_file :
     data = input_file.read()
     # First part of the challenge
     groups = [ grp.split("\n") for grp in data.split("\n\n") ]
