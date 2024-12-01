@@ -1,3 +1,17 @@
+from functools import wraps
+from time import time
+
+def timed(f):
+  @wraps(f)
+  def wrapper(*args, **kwds):
+    start = time()
+    result = f(*args, **kwds)
+    elapsed = time() - start
+    print (f"{f.__name__} took {elapsed} time to finish")
+    return result
+  return wrapper
+
+
 with open('day_1_input.txt') as f:
     lines = f.readlines()
 
@@ -10,33 +24,31 @@ for line in lines:
     first_list.append(entier1)
     second_list.append(entier2)
 
-
+@timed
 def part_one (first_list, second_list):
+
     first_list_sorted = sorted(first_list)
     second_list_sorted = sorted(second_list)
     
-    counter = 0
-
-    for index, num in enumerate(first_list_sorted) :
-
-        diff = num - second_list_sorted[index]
-        counter = counter + abs(diff)
+    # Zip create a list dict of tupples : {('84511', '39170'), (3, 'THREE'), (1, 'ONE')}
+    counter = sum(abs(a - b) for a, b in zip(first_list_sorted, second_list_sorted))
 
     return counter
 
+@timed
 def part_two (first_list, second_list):
+    
     hash_table = {}
-
     counter = 0
 
     for i in first_list :
         if i in second_list : 
-            hash_table[i] = second_list.count(i)
+            if i not in hash_table :
+                hash_table[i] = 0
+            hash_table[i] += 1
 
     for key, value in hash_table.items() :
-        if value > 0 :
-            sum = key * value
-            counter = counter + sum
+        counter += key * value
     
     return counter
 
