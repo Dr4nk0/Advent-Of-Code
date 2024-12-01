@@ -5,35 +5,35 @@ first_list = []
 second_list = []
 
 for line in lines:
-    # Supprimer les espaces inutiles et diviser la ligne en deux nombres
     parties = line.strip().split()
-    # Convertir les deux parties en entiers
-    if len(parties) == 2:  # S'assurer qu'il y a exactement deux colonnes
-        entier1, entier2 = map(int, parties)
-        first_list.append(entier1)
-        second_list.append(entier2)
+    entier1, entier2 = map(int, parties)
+    first_list.append(entier1)
+    second_list.append(entier2)
+
 
 def part_one (first_list, second_list):
-    fl = sorted(first_list)
-    sl = sorted(second_list)
+    first_list_sorted = sorted(first_list)
+    second_list_sorted = sorted(second_list)
+    
     counter = 0
 
-    for value in fl :
-        value_index = fl.index(value)
-        diff = value - sl[value_index]
+    for index, num in enumerate(first_list_sorted) :
+
+        diff = num - second_list_sorted[index]
         counter = counter + abs(diff)
 
     return counter
 
 def part_two (first_list, second_list):
-    hashmap = {}
+    hash_table = {}
+
     counter = 0
 
     for i in first_list :
         if i in second_list : 
-            hashmap[i] = second_list.count(i)
+            hash_table[i] = second_list.count(i)
 
-    for key, value in hashmap.items() :
+    for key, value in hash_table.items() :
         if value > 0 :
             sum = key * value
             counter = counter + sum
@@ -41,5 +41,5 @@ def part_two (first_list, second_list):
     return counter
 
 
-print (part_one (first_list, second_list))
-print (part_two (first_list, second_list))
+print (f"The answer for part one is : {part_one (first_list, second_list)}")
+print (f"The answer for part two is : {part_two (first_list, second_list)}")
