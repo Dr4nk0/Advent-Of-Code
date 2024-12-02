@@ -11,7 +11,11 @@ def timed(f):
     return result
   return wrapper
 
-def day_2_part_one (splitted) :
+with open('input.txt') as f:
+    lines = f.readlines()
+
+
+def is_level_safe (splitted) :
     
     splitted_unique = [i for i in splitted if splitted.count(i) <= 1]
     
@@ -26,28 +30,32 @@ def day_2_part_one (splitted) :
     else :
         return False
 
-                        
-with open('input.txt') as f:
-    lines = f.readlines()
 
-    
+def is_level_dampener (split) :
+
+    for i in range(len(split)) :
+
+        new_split = split[:i] + split[i+1:]
+
+        if is_level_safe(new_split) :
+            return True
+
+
 counter_part_one = 0
-
+counter_part_two = 0
 
 for line in lines:
+
     splitted = line.split()
     splitted_int = [int(i) for i in splitted]
     
-    if day_2_part_one (splitted_int) :
-        print (f"{splitted_int} is safe")
+    if is_level_safe (splitted_int) :
         counter_part_one = counter_part_one + 1
     else :
-        for index, num in enumerate(splitted_int) :
-            test = splitted_int.pop(index)
-            if day_2_part_one (test) :
-                counter_part_one = counter_part_one + 1
-            else :
-                print (f"{splitted_int} is unsafe")
+        if is_level_dampener(splitted_int) :
+            counter_part_two = counter_part_two + 1
+
     
-print (f"The result for part_two is {counter_part_one}")
+print (f"The result of part one is {counter_part_one}")
+print (f"The result of part two is {counter_part_one+counter_part_two}")
 
